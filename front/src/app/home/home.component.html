@@ -1,0 +1,86 @@
+
+<app-menu></app-menu>
+<app-header></app-header>
+    
+ <!-- Page Content -->
+ <div class="container">
+  
+    
+
+    <div class="row">
+      <div class="col-lg-3">
+        
+        <h2 class="my-4">F.A.N.S Boutique</h2>
+        <div class="list-group" *ngFor="let category of categorys; index as i;">
+            <div class="card h-100" *ngIf="i==0">
+                <div class="list-group-item active"><span class="glyphicon glyphicon-list mr-4" ></span >Category</div>
+            </div>
+            <a  routerLink="category/{{category._id}}" class="list-group-item">{{category.name}}</a>
+        </div>
+
+        <div class="list-group" style="height: auto !important;margin-top: 10px;">
+          <div class="list-group-item active">
+              <h5 class="list-group-item active"><span class="glyphicon glyphicon-list mr-4" ></span >Produits Phares</h5>
+          </div>
+          <div class="list-group-item">
+              
+              <div class="list-group-item-text" *ngFor="let product of products; index as i">
+                <p class="list-group-item-text"></p>
+                <h5 *ngIf="i+1<7"><a style="color: black" routerLink="/product/{{product._id}}"><span class="glyphicon glyphicon-chevron-right mr-2"></span>{{product.name}}</a></h5>
+              </div>
+          </div>
+         
+      </div>
+
+
+
+    </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+          
+        <br />
+        <div class="row">
+
+                <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of products; index as i" >
+                    <div class="card h-100" *ngIf="i+1<50">
+                      <a href="#" (click)="imageIndex(i+1)"><img class="card-img-top" [height]="300"  src="../assets/{{product.images}}.jpg" alt=""></a>
+                      <div class="card-body">
+                        <h4 class="card-title">
+                          <a routerLink="/product/{{product._id}}">{{product.name}}</a>
+                          <a href="#"></a>
+                        </h4>
+                        <h5 style="color: red"> {{product.price}} €</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                      </div>
+                      <a routerLink="/product/{{product._id}}">Détail</a>
+                      <div *ngIf="isLogged; then blockLogged else blockNoLogged"></div>
+                      <ng-template #blockLogged>
+                        <div class="card-footer">
+                          <a routerLink="/shoppingCart/{{cartId}}"><button type="button" class="btn btn-primary" (click)="addToCart(product)"> <i class='fas fa-shopping-cart' style='font-size:15px'></i> add</button></a>
+                          <small class="text-muted" > &#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                        </div>
+                      </ng-template>
+                      <ng-template #blockNoLogged>
+                        <a routerLink="/userConnect"><button type="button" class="btn btn-primary">  <i class='fas fa-shopping-cart' style='font-size:15px'></i> add</button></a>
+                      </ng-template>
+                    </div>
+                  </div>
+                  
+                 
+
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+      
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+  <!-- Footer -->
+
+<app-footer></app-footer>

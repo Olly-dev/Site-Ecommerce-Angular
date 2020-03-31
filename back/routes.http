@@ -1,0 +1,137 @@
+/////////////////////////////////////////////////////////////
+///////////////////////ROUTES PRODUCTS///////////////////////
+/////////////////////////////////////////////////////////////
+GET http://localhost:8080/products
+################################
+GET http://localhost:8080/products/sort
+################################
+http://localhost:8080/products/tri?name=b
+################################
+GET http://localhost:8080/products/sortPrice
+################################
+GET http://localhost:8080/products/5e4d49d80a3d603d6e4fdcdd
+################################
+PATCH http://localhost:8080/products/5e4d49d80a3d603d6e4fdcfe
+################################
+DELETE http://localhost:8080/products/5e4d49d80a3d603d6e4fdcfe
+################################
+POST http://localhost:8080/products/add
+################################
+
+/////////////////////////////////////////////////////////////
+//////////////////////ROUTES CATEGORIES//////////////////////
+/////////////////////////////////////////////////////////////
+GET http://localhost:8080/categories
+################################
+GET http://localhost:8080/categories/5e4e598db07d2c4c1da1e39a
+################################
+GET http://localhost:8080/
+################################
+
+/////////////////////////////////////////////////////////////
+////////////////ROUTES SHOPPINGCARTS/////////////////////////
+/////////////////////////////////////////////////////////////
+GET http://localhost:8080/shoppingCart
+################################
+POST http://localhost:8080/shoppingCart/5e54d8de19497674635df03e
+Content-Type: application/json
+
+{
+    "name": "Quo Lux",
+    "price": 7656021752,
+    "qte": 5,
+    "img": "",
+    "_id": "5e4d49d80a3d603d6e4fdce7"
+}
+################################
+GET http://localhost:8080/shoppingCart/5e4fd53b72be020540614df8
+################################
+DELETE http://localhost:8080/shoppingCart/5e4fd53b72be020540614df8/product/5e4d49d80a3d603d6e4fdcdc
+#######################
+GET http://localhost:8080/shoppingCart/userCart/5e53fe0e0de25b30681b7372
+################################
+
+# db.getCollection("carts").deleteOne({}, { $pull: { products: { _id: "5e4d49d80a3d603d6e4fdcdc" } } }, {multi:true})
+################################
+
+/////////////////////////////////////////////////////////////
+///////////////////////ROUTES USERS//////////////////////////
+/////////////////////////////////////////////////////////////
+GET http://localhost:8080/users
+################################
+GET http://localhost:8080/users/5e53fe0e0de25b30681b7372
+################################
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+    "gender": "Monsieur",
+    "lastname": "François",
+    "firstname": "MARION",
+    "dateOfBirth": "31/12/1987",
+    "username": "francoisdevtest",
+    "password": "francois13",
+    "email": "johnwick@gmail.com",
+    "phone": "",
+    "cards": [
+        { "cardNumber": "323242535837468364", "cardUserName": "MR MARION FRANCOIS", "cardDate": "13/01/2022", "cardSecretVerif": "743" },
+        { "cardNumber": "323242535837469878", "cardUserName": "MR MARION FRANCOIS", "cardDate": "13/01/2021", "cardSecretVerif": "325" }
+    ],
+    "adresses": [
+        { "adresse1": "23 rue des lilas", "adresse2": null, "codePostal": "21210", "ville": "SAULIEU" },
+        { "adresse1": "55 avenue du général de gaulle", "adresse2": "chemin bis", "codePostal": "13100", "ville": "AIX EN PROVENCE" }
+    ]
+}
+################################
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+    "username": "francoisdevtest",
+    "password": "francois13"
+}
+################################
+
+GET http://localhost:8080/admins
+################################
+
+POST http://localhost:8080/admins/login
+Content-Type: application/json
+
+{
+    "firstname" : "test",
+    "lastname" : "test",
+    "username": "test",
+    "password": "test"
+}
+################################
+#####################################
+PUT http://localhost:8080/users/5e53fe0e0de25b30681b7372
+Content-Type: application/json
+
+{
+    "_id": "5e53fe0e0de25b30681b7372",
+    "gender": "Monsieur",
+    "lastname": "MARION",
+    "firstname": "François",
+    "dateOfBirth": "31/12/1987",
+    "username": "f",
+    "password": "a",
+    "email": "blablabla@gmail.com",
+    "phone": "6",
+    "cards": [
+        { "cardNumber": "234565876", "cardUserName": "MR MARION FRANCOIS", "cardDate": "13/01/2022", "cardSecretVerif": "743" },
+        { "cardNumber": "456754673", "cardUserName": "MR MARION FRANCOIS", "cardDate": "13/01/2021", "cardSecretVerif": "325" },
+        { "cardNumber": "3", "cardUserName": "MR MARION FRANCOIS", "cardDate": "13/01/2021", "cardSecretVerif": "325" }
+    ],
+    "adresses": [
+        { "adresse1": "23 rue ON NE SAIT PAS", "adresse2": null, "codePostal": "21210", "ville": "SAULIEU" },
+        { "adresse1": "55 avenue du général de gaulle", "adresse2": "chemin bis", "codePostal": "13100", "ville": "AIX EN PROVENCE" }
+    ]
+}
+################################
+PUT http://localhost:8080/users/5e53fe0e0de25b30681b7372/adresse/5e55496ff1e8c62f68e65474
+################################
+PUT http://localhost:8080/users/5e53fe0e0de25b30681b7372/card/5e55496ff1e8c62f68e65476
+GET http://localhost:8080/payments/5e5534dd19497674635df154
+################################

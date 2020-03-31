@@ -1,0 +1,158 @@
+
+<app-menu></app-menu>
+<!-- Page Content -->
+ <div class="container">
+
+    <div class="row">
+
+      <div class="col-lg-3">
+
+        <div class="border-sideBar">
+
+          <div class="list-group" style="height: auto !important;">
+            <div class="list-group-item active">
+                <h4 class="list-group-item-heading"><span class="glyphicon glyphicon-list mr-4"></span>Choisir votre produit</h4>
+                <p class="list-group-item-text">Vous pouvez filtrer les résultats obtenues.</p>
+            </div>
+            <div class="list-group-item">
+                <h4 class="list-group-item-heading">Trier Par: </h4>
+                <p class="list-group-item-text">
+                  <select id="sort" name="sort" class="form-control selcls" (change)="this.onChange($event.target.value)">
+                    <option value="" disabled selected> --choisir--</option>
+                    <option value="alphabetical"> Nom</option>
+                    <option value="price"> Prix</option>
+                  </select>
+                </p>
+            </div>
+            <div class="list-group-item">
+              <h4 class="list-group-item-heading">Filtre taille</h4>
+              <p class="list-group-item-text"></p>
+               <div>
+
+                <fieldset>
+                  <div class="form-inline ml-3">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" name="taille" id="customRadio1" value="s" class="custom-control-input"  (change)="radioChangeHandler($event)">
+                      <label class="custom-control-label mr-2" for="customRadio1">S</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" name="taille" id="customRadio2" value="m" class="custom-control-input" (change)="radioChangeHandler($event)">
+                      <label class="custom-control-label mr-2" for="customRadio2">M</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" name="taille" id="customRadio3" value="l" class="custom-control-input" (change)="radioChangeHandler($event)">
+                      <label class="custom-control-label mr-2" for="customRadio3">L</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" name="taille" id="customRadio4" value="xl" class="custom-control-input"  (change)="radioChangeHandler($event)">
+                      <label class="custom-control-label" for="customRadio4">XL</label>
+                    </div>
+                  </div>
+                  </fieldset>
+               </div>
+                
+          </div>
+            <div class="list-group-item" style="height: auto !important;">
+                <h4 class="list-group-item-heading">Filtre par Prix</h4>
+                <p class="list-group-item-text"></p>
+
+                <fieldset>
+                  <div class="form-group ml-5">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" name="plagePrix" id="customRadio5" value="100" class="custom-control-input"  (change)="radioChangeHandlerPrice($event)" >
+                      <label class="custom-control-label" for="customRadio5">0 - 100</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" name="plagePrix" id="customRadio6" value="200" class="custom-control-input" (change)="radioChangeHandlerPrice($event)">
+                      <label class="custom-control-label" for="customRadio6">100 - 200</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" name="plagePrix" id="customRadio7" value="300" class="custom-control-input" (change)="radioChangeHandlerPrice($event)" >
+                      <label class="custom-control-label" for="customRadio7">200 - 300</label>
+                    </div>
+                  </div>
+                </fieldset>
+                
+                
+             </div>        
+        </div>
+
+
+      </div>
+
+      <div class="list-group" style="height: auto !important;margin-top: 10px;">
+        <div class="list-group-item active">
+            <h5 class="list-group-item active"><span class="glyphicon glyphicon-list mr-4" ></span >Produits Phares</h5>
+        </div>
+        <div class="list-group-item">
+            
+            <div class="list-group-item-text" *ngFor="let product of productsL; index as i">
+              <p class="list-group-item-text"></p>
+              <h5 *ngIf="i+1<7"><a style="color: black" routerLink="/product/{{product._id}}"><span class="glyphicon glyphicon-chevron-right mr-2"></span>{{product.name}}</a></h5>
+            </div>
+        </div>
+       
+    </div>
+
+
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+          
+        <br />
+
+        <div *ngIf="affichage?.length == 0;">
+          <div class="alert alert-danger" role="alert">
+            pas de produits dans cette sélection
+          </div>
+        </div>
+      
+      
+       
+
+          <div class="row">
+          
+            <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of affichage; index as i" >
+              <div class="card h-100" *ngIf="i+1<50">
+                <a href="#" ><img class="card-img-top" [height]="250" src="../assets/{{product.images}}.jpg" alt=""></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                      <a routerLink="/product/{{product._id}}">{{product.name}}</a>
+                  </h4>
+                  <h5 style="color: red">{{product.price}} €</h5>
+                  <h5 >Taille:  {{product.size | uppercase}}</h5>
+
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                </div>
+                <div class="card-footer">
+                  <a routerLink="/shoppingCart/5e4ff9a4f4250a48fa454f35">
+                    <button type="button" class="btn btn-primary" (click)="addToCart(product)"> <i class='fas fa-shopping-cart' style='font-size:15px'></i> add</button>
+                  </a>
+                  <small class="text-muted" > &#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+              </div>
+            </div>
+          
+            </div>
+           
+
+    
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+      
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Do with &#x2764; By F.A.N.S Team     </p>
+    </div>
+    <!-- /.container -->
+  </footer>
